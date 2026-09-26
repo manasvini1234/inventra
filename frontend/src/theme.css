@@ -1,0 +1,437 @@
+/* INVENTRA LIGHT + DARK THEME
+   Light: Arctic + White + Dark Text
+   Dark: Black + White
+*/
+
+:root {
+  --arctic: #BCDDDC;
+  --arctic-dark: #8FBDBB;
+  --arctic-soft: #EAF6F5;
+  --white: #FFFFFF;
+  --text: #202525;
+  --muted: #66706F;
+  --border: #C9E1E0;
+}
+
+/* ================= LIGHT MODE ================= */
+
+html,
+body,
+#root {
+  background: var(--white) !important;
+  color: var(--text) !important;
+}
+
+body {
+  background: var(--white) !important;
+  color: var(--text) !important;
+}
+
+/* Main application */
+.app-layout {
+  background: var(--white) !important;
+  color: var(--text) !important;
+}
+
+.main-content,
+.topbar {
+  background: var(--white) !important;
+}
+
+/* Sidebar */
+.sidebar {
+  background: var(--arctic) !important;
+  color: var(--text) !important;
+  border-right: 1px solid var(--arctic-dark) !important;
+}
+
+.brand h2,
+.brand span,
+.brand {
+  color: var(--text) !important;
+}
+
+.brand-icon {
+  background: var(--white) !important;
+  color: var(--text) !important;
+}
+
+.nav-item {
+  background: transparent !important;
+  color: var(--text) !important;
+  border: 1px solid transparent !important;
+}
+
+.nav-item:hover {
+  background: rgba(255,255,255,0.55) !important;
+  color: var(--text) !important;
+}
+
+.nav-item.active {
+  background: var(--white) !important;
+  color: var(--text) !important;
+  border-color: rgba(32,37,37,0.08) !important;
+}
+
+.nav-icon {
+  color: inherit !important;
+}
+
+.sidebar .logout {
+  color: var(--text) !important;
+}
+
+/* Top bar */
+.topbar h1,
+.topbar p,
+.topbar strong,
+.topbar small {
+  color: var(--text) !important;
+}
+
+.avatar,
+.big-avatar {
+  background: var(--arctic) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--arctic-dark) !important;
+}
+
+/* Welcome section */
+.welcome {
+  background: var(--arctic) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--arctic-dark) !important;
+}
+
+.welcome h2,
+.welcome p {
+  color: var(--text) !important;
+}
+
+/* Cards / panels */
+.panel,
+.form-card,
+.info-card,
+.warehouse-card,
+.settings-card,
+.profile-card,
+.kpi-card,
+.recent-panel {
+  background: var(--white) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+
+.panel-header h3,
+.panel-header p,
+.form-card h3,
+.info-card h3,
+.warehouse-card h3,
+.settings-card h3,
+.profile-card h2,
+.kpi-card p,
+.kpi-card h2 {
+  color: var(--text) !important;
+}
+
+/* KPI / icons — only Arctic + white */
+.kpi-icon,
+.lavender-icon,
+.orange-icon,
+.red-icon,
+.green-icon,
+.purple-icon,
+.blue-icon,
+.info-icon,
+.warehouse-icon {
+  background: var(--arctic-soft) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+/* Buttons */
+.primary-btn {
+  background: var(--arctic) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--arctic-dark) !important;
+  box-shadow: none !important;
+}
+
+.primary-btn:hover {
+  background: var(--arctic-dark) !important;
+  color: var(--text) !important;
+}
+
+.secondary-btn,
+.theme-option {
+  background: var(--white) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--arctic-dark) !important;
+}
+
+.secondary-btn:hover,
+.theme-option:hover,
+.theme-option.active {
+  background: var(--arctic-soft) !important;
+  color: var(--text) !important;
+}
+
+/* Inputs */
+input,
+select,
+textarea {
+  background: var(--white) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--arctic-dark) !important;
+  box-shadow: 0 0 0 3px rgba(188,221,220,0.45) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted) !important;
+}
+
+/* Tables */
+table {
+  background: var(--white) !important;
+}
+
+th {
+  background: var(--arctic-soft) !important;
+  color: var(--text) !important;
+}
+
+td,
+th,
+tr {
+  border-color: var(--border) !important;
+}
+
+td,
+strong,
+label {
+  color: var(--text) !important;
+}
+
+/* Statuses */
+.status,
+.status.success,
+.status.warning,
+.status.info,
+.status.danger,
+.status.cancelled {
+  background: var(--arctic-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* Progress */
+.progress {
+  background: #E4EEEE !important;
+}
+
+.progress > div,
+.orange-progress > div,
+.red-progress > div {
+  background: var(--arctic-dark) !important;
+}
+
+/* Search and form spacing */
+.search-row {
+  gap: 20px !important;
+  margin-bottom: 22px !important;
+}
+
+.operation-layout {
+  gap: 32px !important;
+}
+
+.form-card label {
+  display: block !important;
+  margin-top: 20px !important;
+  margin-bottom: 9px !important;
+}
+
+.form-card input,
+.form-card select,
+.form-card textarea,
+.product-form input {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.product-form {
+  gap: 18px !important;
+}
+
+/* Settings / profile */
+.settings-card label {
+  color: var(--text) !important;
+}
+
+.profile-details span,
+.profile-details strong {
+  color: var(--text) !important;
+}
+
+/* ================= LOGIN ================= */
+
+.login-page {
+  background: var(--arctic) !important;
+  color: var(--text) !important;
+}
+
+.login-page > div {
+  background: var(--white) !important;
+}
+
+.login-page .primary-btn {
+  background: var(--arctic) !important;
+  color: var(--text) !important;
+  border-color: var(--arctic-dark) !important;
+}
+
+.login-page .primary-btn:hover {
+  background: var(--arctic-dark) !important;
+}
+
+.login-page input {
+  background: var(--white) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+/* ================= DARK MODE ================= */
+
+.app-layout.dark-mode,
+.app-layout.dark-mode .main-content,
+.app-layout.dark-mode .topbar {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+.app-layout.dark-mode .sidebar {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #222222 !important;
+}
+
+.app-layout.dark-mode .brand,
+.app-layout.dark-mode .brand h2,
+.app-layout.dark-mode .brand span,
+.app-layout.dark-mode .nav-item,
+.app-layout.dark-mode .nav-icon,
+.app-layout.dark-mode .topbar h1,
+.app-layout.dark-mode .topbar p,
+.app-layout.dark-mode .topbar strong,
+.app-layout.dark-mode .topbar small {
+  color: #ffffff !important;
+}
+
+.app-layout.dark-mode .nav-item:hover,
+.app-layout.dark-mode .nav-item.active {
+  background: #181818 !important;
+  color: #ffffff !important;
+}
+
+.app-layout.dark-mode .panel,
+.app-layout.dark-mode .form-card,
+.app-layout.dark-mode .info-card,
+.app-layout.dark-mode .warehouse-card,
+.app-layout.dark-mode .settings-card,
+.app-layout.dark-mode .profile-card,
+.app-layout.dark-mode .kpi-card,
+.app-layout.dark-mode .recent-panel,
+.app-layout.dark-mode .welcome {
+  background: #050505 !important;
+  color: #ffffff !important;
+  border-color: #242424 !important;
+}
+
+.app-layout.dark-mode h1,
+.app-layout.dark-mode h2,
+.app-layout.dark-mode h3,
+.app-layout.dark-mode h4,
+.app-layout.dark-mode strong,
+.app-layout.dark-mode td,
+.app-layout.dark-mode th,
+.app-layout.dark-mode label {
+  color: #ffffff !important;
+}
+
+.app-layout.dark-mode p,
+.app-layout.dark-mode small {
+  color: #bdbdbd !important;
+}
+
+.app-layout.dark-mode input,
+.app-layout.dark-mode select,
+.app-layout.dark-mode textarea {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #333333 !important;
+  box-shadow: none !important;
+}
+
+.app-layout.dark-mode .primary-btn {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+}
+
+.app-layout.dark-mode .secondary-btn,
+.app-layout.dark-mode .theme-option {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #333333 !important;
+}
+
+.app-layout.dark-mode .theme-option.active {
+  background: #222222 !important;
+  color: #ffffff !important;
+}
+
+.app-layout.dark-mode .status,
+.app-layout.dark-mode .status.success,
+.app-layout.dark-mode .status.warning,
+.app-layout.dark-mode .status.info,
+.app-layout.dark-mode .status.danger,
+.app-layout.dark-mode .kpi-icon,
+.app-layout.dark-mode .lavender-icon,
+.app-layout.dark-mode .orange-icon,
+.app-layout.dark-mode .red-icon,
+.app-layout.dark-mode .green-icon,
+.app-layout.dark-mode .purple-icon,
+.app-layout.dark-mode .blue-icon,
+.app-layout.dark-mode .info-icon,
+.app-layout.dark-mode .warehouse-icon {
+  background: #181818 !important;
+  color: #ffffff !important;
+  border-color: #333333 !important;
+}
+
+.app-layout.dark-mode .progress {
+  background: #222222 !important;
+}
+
+.app-layout.dark-mode .progress > div,
+.app-layout.dark-mode .orange-progress > div,
+.app-layout.dark-mode .red-progress > div {
+  background: #ffffff !important;
+}
+
+/* Responsive */
+@media (max-width: 820px) {
+  .search-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+  }
+}

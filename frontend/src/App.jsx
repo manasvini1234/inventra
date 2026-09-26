@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import "./theme.css";
 
 const API = "http://localhost:5000/api/products";
 
@@ -157,9 +158,17 @@ const dummyWarehouses = [
 ];
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLogoutScreen, setShowLogoutScreen] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [theme, setTheme] = useState("light");
   const [page, setPage] = useState("Dashboard");
   const [products, setProducts] = useState([]);
   const [showAdd, setShowAdd] = useState(false);
+  const [loginForm, setLoginForm] = useState({
+    email: "",
+    password: "",
+  });
 
   const [form, setForm] = useState({
     name: "",
@@ -216,6 +225,11 @@ function App() {
     }
   };
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setIsLoggedIn(true);
+  };
+
   const totalStock = products.reduce(
     (sum, p) => sum + Number(p.initial_stock || 0),
     0
@@ -251,8 +265,512 @@ function App() {
     return "";
   };
 
+  if (showLogoutScreen) {
+    return (
+      <div
+        className="login-page"
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "32px",
+          boxSizing: "border-box",
+          background:
+            "radial-gradient(circle at top left, #e7e0f2 0%, #f7f5fa 38%, #f2eff7 100%)",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "460px",
+            background: "#ffffff",
+            borderRadius: "28px",
+            padding: "42px",
+            boxSizing: "border-box",
+            textAlign: "center",
+            boxShadow: "0 24px 70px rgba(49, 46, 129, 0.16)",
+            border: "1px solid rgba(99, 102, 241, 0.12)",
+          }}
+        >
+          <div
+            style={{
+              width: "72px",
+              height: "72px",
+              margin: "0 auto 22px",
+              borderRadius: "20px",
+              display: "grid",
+              placeItems: "center",
+              background: "linear-gradient(135deg, #8b7bb8, #a58fca)",
+              color: "#fff",
+              fontSize: "30px",
+              fontWeight: 800,
+            }}
+          >
+            ◆
+          </div>
+
+          <h1 style={{ margin: "0 0 8px", color: "#24212b" }}>Signed Out</h1>
+          <p style={{ margin: "0 0 28px", color: "#6f6a73", lineHeight: 1.6 }}>
+            You have been safely logged out of Inventra.
+          </p>
+
+          <button
+            className="primary-btn"
+            style={{ width: "100%", minHeight: "52px", borderRadius: "14px" }}
+            onClick={() => {
+              setShowLogoutScreen(false);
+              setIsLoggedIn(false);
+              setPage("Dashboard");
+            }}
+          >
+            Back to Login
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isLoggedIn) {
+    return (
+      <div
+        className="login-page"
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "28px",
+          boxSizing: "border-box",
+          background:
+            "radial-gradient(circle at 10% 10%, #e7e0f2 0%, transparent 32%), linear-gradient(135deg, #f7f5fa 0%, #f2eff7 52%, #faf9fc 100%)",
+          fontFamily: "Manrope, sans-serif",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            maxWidth: "1080px",
+            minHeight: "650px",
+            display: "grid",
+            gridTemplateColumns: "1.02fr 0.98fr",
+            background: "#fff",
+            borderRadius: "30px",
+            overflow: "hidden",
+            boxShadow: "0 30px 90px rgba(49, 46, 129, 0.18)",
+            border: "1px solid rgba(99, 102, 241, 0.12)",
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              padding: "54px",
+              color: "#fff",
+              background:
+                "linear-gradient(145deg, #29252f 0%, #433b4d 100%)",
+              overflow: "hidden",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                width: "280px",
+                height: "280px",
+                borderRadius: "50%",
+                background: "rgba(255,255,255,0.07)",
+                top: "-100px",
+                right: "-90px",
+              }}
+            />
+
+            <div
+              style={{
+                position: "absolute",
+                width: "220px",
+                height: "220px",
+                borderRadius: "50%",
+                background: "rgba(167,139,250,0.12)",
+                bottom: "-100px",
+                left: "-80px",
+              }}
+            />
+
+            <div style={{ position: "relative", zIndex: 1 }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "14px",
+                  marginBottom: "70px",
+                }}
+              >
+                <div
+                  style={{
+                    width: "52px",
+                    height: "52px",
+                    borderRadius: "15px",
+                    display: "grid",
+                    placeItems: "center",
+                    background: "rgba(255,255,255,0.14)",
+                    border: "1px solid rgba(255,255,255,0.18)",
+                    fontSize: "22px",
+                  }}
+                >
+                  ◆
+                </div>
+                <div>
+                  <div style={{ fontSize: "25px", fontWeight: 800 }}>Inventra</div>
+                  <div style={{ fontSize: "12px", opacity: 0.7 }}>
+                    INVENTORY MANAGEMENT
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ maxWidth: "450px" }}>
+                <div
+                  style={{
+                    display: "inline-block",
+                    padding: "8px 13px",
+                    borderRadius: "999px",
+                    background: "rgba(255,255,255,0.11)",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    fontSize: "12px",
+                    fontWeight: 700,
+                    letterSpacing: "0.4px",
+                    marginBottom: "20px",
+                  }}
+                >
+                  SMART INVENTORY CONTROL
+                </div>
+
+                <h1
+                  style={{
+                    margin: "0 0 18px",
+                    fontSize: "42px",
+                    lineHeight: 1.12,
+                    fontWeight: 800,
+                  }}
+                >
+                  Manage your inventory with confidence.
+                </h1>
+
+                <p
+                  style={{
+                    margin: 0,
+                    color: "rgba(255,255,255,0.76)",
+                    fontSize: "15px",
+                    lineHeight: 1.8,
+                  }}
+                >
+                  A centralized workspace for products, stock movements,
+                  warehouses, receipts, deliveries, transfers, and adjustments.
+                </p>
+              </div>
+
+              <div
+                style={{
+                  display: "grid",
+                  gap: "14px",
+                  marginTop: "38px",
+                  maxWidth: "430px",
+                }}
+              >
+                {[
+                  ["✓", "Track products and stock levels"],
+                  ["↔", "Manage inventory movements"],
+                  ["▣", "Organize warehouses and locations"],
+                ].map(([icon, label]) => (
+                  <div
+                    key={label}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "13px",
+                      color: "rgba(255,255,255,0.9)",
+                      fontSize: "14px",
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "9px",
+                        display: "grid",
+                        placeItems: "center",
+                        background: "rgba(255,255,255,0.12)",
+                        fontWeight: 800,
+                      }}
+                    >
+                      {icon}
+                    </span>
+                    {label}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div
+              style={{
+                position: "relative",
+                zIndex: 1,
+                fontSize: "12px",
+                color: "rgba(255,255,255,0.55)",
+              }}
+            >
+              Inventra Inventory Management System
+            </div>
+          </div>
+
+          <div
+            style={{
+              padding: "54px 58px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              boxSizing: "border-box",
+            }}
+          >
+            <div style={{ maxWidth: "430px", width: "100%", margin: "0 auto" }}>
+              <div style={{ marginBottom: "34px" }}>
+                <div
+                  style={{
+                    color: "#8b7bb8",
+                    fontSize: "13px",
+                    fontWeight: 800,
+                    marginBottom: "10px",
+                    letterSpacing: "0.5px",
+                  }}
+                >
+                  WELCOME BACK
+                </div>
+                <h2
+                  style={{
+                    margin: "0 0 9px",
+                    color: "#24212b",
+                    fontSize: "32px",
+                    fontWeight: 800,
+                  }}
+                >
+                  Sign in to Inventra
+                </h2>
+                <p style={{ margin: 0, color: "#6f6a73", fontSize: "14px" }}>
+                  Enter your account details to continue to your dashboard.
+                </p>
+              </div>
+
+              <form onSubmit={handleLogin}>
+                <div style={{ marginBottom: "20px" }}>
+                  <label
+                    style={{
+                      display: "block",
+                      marginBottom: "8px",
+                      color: "#302b36",
+                      fontSize: "13px",
+                      fontWeight: 700,
+                    }}
+                  >
+                    Email or Username
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter your email or username"
+                    value={loginForm.email}
+                    onChange={(e) =>
+                      setLoginForm({ ...loginForm, email: e.target.value })
+                    }
+                    required
+                    style={{
+                      width: "100%",
+                      height: "52px",
+                      boxSizing: "border-box",
+                      border: "1px solid #ded9e5",
+                      borderRadius: "13px",
+                      padding: "0 16px",
+                      outline: "none",
+                      fontSize: "14px",
+                      background: "#fafaff",
+                    }}
+                  />
+                </div>
+
+                <div style={{ marginBottom: "14px" }}>
+                  <label
+                    style={{
+                      display: "block",
+                      marginBottom: "8px",
+                      color: "#302b36",
+                      fontSize: "13px",
+                      fontWeight: 700,
+                    }}
+                  >
+                    Password
+                  </label>
+
+                  <div style={{ position: "relative" }}>
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Enter your password"
+                      value={loginForm.password}
+                      onChange={(e) =>
+                        setLoginForm({
+                          ...loginForm,
+                          password: e.target.value,
+                        })
+                      }
+                      required
+                      style={{
+                        width: "100%",
+                        height: "52px",
+                        boxSizing: "border-box",
+                        border: "1px solid #ded9e5",
+                        borderRadius: "13px",
+                        padding: "0 54px 0 16px",
+                        outline: "none",
+                        fontSize: "14px",
+                        background: "#fafaff",
+                      }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      style={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "8px",
+                        height: "36px",
+                        width: "38px",
+                        border: "0",
+                        borderRadius: "9px",
+                        background: "transparent",
+                        color: "#6f6a73",
+                        cursor: "pointer",
+                      }}
+                      aria-label="Toggle password visibility"
+                    >
+                      {showPassword ? "◉" : "○"}
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: "26px",
+                  }}
+                >
+                  <label
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      fontSize: "13px",
+                      color: "#6f6a73",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <input type="checkbox" />
+                    Remember me
+                  </label>
+
+                  <button
+                    type="button"
+                    onClick={() => alert("Password recovery can be connected here.")}
+                    style={{
+                      border: 0,
+                      background: "transparent",
+                      color: "#8b7bb8",
+                      fontSize: "13px",
+                      fontWeight: 700,
+                      cursor: "pointer",
+                    }}
+                  >
+                    Forgot password?
+                  </button>
+                </div>
+
+                <button
+                  className="primary-btn"
+                  type="submit"
+                  style={{
+                    width: "100%",
+                    height: "54px",
+                    borderRadius: "14px",
+                    fontSize: "15px",
+                    fontWeight: 800,
+                  }}
+                >
+                  Sign In →
+                </button>
+              </form>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  margin: "30px 0 22px",
+                  color: "#aaa5ae",
+                  fontSize: "11px",
+                }}
+              >
+                <div style={{ flex: 1, height: "1px", background: "#ece8ef" }} />
+                SECURE ACCESS
+                <div style={{ flex: 1, height: "1px", background: "#ece8ef" }} />
+              </div>
+
+              <div
+                style={{
+                  padding: "13px 15px",
+                  borderRadius: "12px",
+                  background: "#f6f2fa",
+                  border: "1px solid #e8e1f0",
+                  color: "#6e6878",
+                  fontSize: "12px",
+                  lineHeight: 1.6,
+                }}
+              >
+                <strong style={{ color: "#433d4d" }}>Inventory Manager</strong>
+                <br />
+                Access your products, stock operations, warehouses, and reports
+                from one workspace.
+              </div>
+
+              <p
+                style={{
+                  margin: "24px 0 0",
+                  textAlign: "center",
+                  color: "#aaa5ae",
+                  fontSize: "11px",
+                }}
+              >
+                © 2026 Inventra · Inventory Management System
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <style>{`
+          @media (max-width: 820px) {
+            .login-page > div {
+              grid-template-columns: 1fr !important;
+            }
+            .login-page > div > div:first-child {
+              display: none !important;
+            }
+          }
+        `}</style>
+      </div>
+    );
+  }
+
+
   return (
-    <div className="app-layout">
+    <div className={`app-layout ${theme === "dark" ? "dark-mode" : ""}`}>
       {/* SIDEBAR */}
       <aside className="sidebar">
         <div className="brand">
@@ -289,7 +807,15 @@ function App() {
             My Profile
           </button>
 
-          <button className="nav-item logout">
+          <button
+            className="nav-item logout"
+            onClick={() => {
+              setIsLoggedIn(false);
+              setShowLogoutScreen(true);
+              setPage("Dashboard");
+              setShowAdd(false);
+            }}
+          >
             <span className="nav-icon">↪</span>
             Logout
           </button>
@@ -340,7 +866,7 @@ function App() {
 
             <section className="kpi-grid">
               <div className="kpi-card">
-                <div className="kpi-icon blue-icon">▦</div>
+                <div className="kpi-icon lavender-icon">▦</div>
                 <div>
                   <p>Total Products</p>
                   <h2>{products.length}</h2>
@@ -372,7 +898,7 @@ function App() {
               </div>
 
               <div className="kpi-card">
-                <div className="kpi-icon purple-icon">↔</div>
+                <div className="kpi-icon lavender-icon">↔</div>
                 <div>
                   <p>Transfers</p>
                   <h2>{dummyTransfers.length}</h2>
@@ -1230,6 +1756,26 @@ function App() {
                 <span>Inventory Ledger</span>
                 <input type="checkbox" defaultChecked />
               </label>
+
+              <div className="theme-setting">
+                <span>Appearance</span>
+                <div className="theme-options">
+                  <button
+                    type="button"
+                    className={theme === "light" ? "theme-option active" : "theme-option"}
+                    onClick={() => setTheme("light")}
+                  >
+                    ☀ Light
+                  </button>
+                  <button
+                    type="button"
+                    className={theme === "dark" ? "theme-option active" : "theme-option"}
+                    onClick={() => setTheme("dark")}
+                  >
+                    ☾ Dark
+                  </button>
+                </div>
+              </div>
             </div>
           </section>
         )}
@@ -1241,18 +1787,32 @@ function App() {
               <div className="big-avatar">S</div>
 
               <h2>Sai Shree</h2>
-
               <p>Inventory Manager</p>
 
               <div className="profile-details">
+                <div>
+                  <span>Full Name</span>
+                  <strong>Sai Shree</strong>
+                </div>
+
                 <div>
                   <span>Role</span>
                   <strong>Inventory Manager</strong>
                 </div>
 
                 <div>
-                  <span>Access</span>
+                  <span>Email</span>
+                  <strong>saishree@inventra.com</strong>
+                </div>
+
+                <div>
+                  <span>Access Level</span>
                   <strong>Administrator</strong>
+                </div>
+
+                <div>
+                  <span>Department</span>
+                  <strong>Inventory Operations</strong>
                 </div>
 
                 <div>
@@ -1261,9 +1821,35 @@ function App() {
                 </div>
 
                 <div>
-                  <span>Status</span>
+                  <span>Account Status</span>
                   <strong>Active</strong>
                 </div>
+
+                <div>
+                  <span>Preferred Theme</span>
+                  <strong>{theme === "dark" ? "Dark Mode" : "Light Mode"}</strong>
+                </div>
+              </div>
+
+              <div className="profile-actions">
+                <button
+                  className="secondary-btn"
+                  onClick={() => setPage("Settings")}
+                >
+                  Account Settings
+                </button>
+
+                <button
+                  className="primary-btn"
+                  onClick={() => {
+                    setIsLoggedIn(false);
+                    setShowLogoutScreen(true);
+                    setPage("Dashboard");
+                    setShowAdd(false);
+                  }}
+                >
+                  Logout
+                </button>
               </div>
             </div>
           </section>
