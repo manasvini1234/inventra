@@ -321,7 +321,7 @@ function App() {
           <>
             <section className="welcome">
               <div>
-                <h2>Good afternoon, Sai Shree 👋</h2>
+                <h2>Good morning, Manager 👋</h2>
                 <p>
                   Here's your inventory operations overview for today.
                 </p>
